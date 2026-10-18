@@ -1,0 +1,497 @@
+:root {
+  --bg: #0b0a14;
+  --panel: #131126;
+  --panel-2: #191733;
+  --line: rgba(255, 255, 255, 0.08);
+  --ink: #eae7ff;
+  --muted: #918cb5;
+  --accent: #b39dff;
+  --accent-2: #6df0ff;
+  --danger: #ff6b81;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+#shell {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 232px 1fr 288px;
+  grid-template-areas:
+    "toolbar toolbar toolbar"
+    "outline viewport inspector"
+    "timeline timeline timeline";
+  height: 100vh;
+}
+
+/* ------------------------------ toolbar ------------------------------ */
+
+#toolbar {
+  grid-area: toolbar;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.5rem 0.75rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+}
+
+#toolbar .brand-mini {
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  color: var(--accent);
+  margin-right: 0.5rem;
+}
+
+.tool-group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.tool-divider {
+  width: 1px;
+  height: 1.4rem;
+  background: var(--line);
+  margin: 0 0.35rem;
+}
+
+/* ------------------------------ panels ------------------------------ */
+
+#panel-outline {
+  grid-area: outline;
+  overflow-y: auto;
+  background: var(--panel);
+  border-right: 1px solid var(--line);
+  padding: 0.75rem;
+}
+
+#panel-inspector {
+  grid-area: inspector;
+  overflow-y: auto;
+  background: var(--panel);
+  border-left: 1px solid var(--line);
+  padding: 0.75rem;
+}
+
+#viewport-wrap {
+  grid-area: viewport;
+  position: relative;
+  min-height: 0;
+  background: #050409;
+}
+
+#viewport {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#status {
+  position: absolute;
+  left: 0.75rem;
+  bottom: 0.6rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+#panel-timeline {
+  grid-area: timeline;
+  background: var(--panel);
+  border-top: 1px solid var(--line);
+  padding: 0.6rem 0.9rem 0.75rem;
+}
+
+/* ------------------------------ controls ------------------------------ */
+
+.section {
+  margin-bottom: 1.1rem;
+}
+
+.section-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.subgroup {
+  border-left: 1px solid var(--line);
+  padding-left: 0.5rem;
+  margin: 0.35rem 0 0.35rem 0.15rem;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 5.6rem 1fr;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.row-label {
+  color: var(--muted);
+  font-size: 0.72rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row-value {
+  font-size: 0.7rem;
+  color: var(--muted);
+  min-width: 2.4rem;
+  text-align: right;
+}
+
+.row-slider {
+  grid-template-columns: 5.6rem 1fr 2.4rem;
+}
+
+.row-check {
+  grid-template-columns: 1fr auto;
+}
+
+.row-vec {
+  grid-template-columns: 5.6rem 1fr;
+}
+
+.vec {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.25rem;
+}
+
+.ctl {
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.3rem;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--ink);
+  font-size: 0.74rem;
+  font-family: inherit;
+}
+
+.ctl:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.ctl.color {
+  padding: 0.1rem;
+  height: 1.65rem;
+  cursor: pointer;
+}
+
+.ctl.check {
+  width: auto;
+  accent-color: var(--accent);
+}
+
+.ctl.range {
+  padding: 0;
+  height: 1.1rem;
+  accent-color: var(--accent);
+  background: transparent;
+  border: none;
+}
+
+.ctl:disabled {
+  opacity: 0.4;
+}
+
+/* ------------------------------ buttons ------------------------------ */
+
+.btn {
+  padding: 0.34rem 0.7rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--ink);
+  font-size: 0.73rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.btn:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.btn.tiny {
+  padding: 0.26rem 0.55rem;
+  font-size: 0.7rem;
+}
+
+.btn.active {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  color: #100e1f;
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.btn.ghost {
+  background: transparent;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.35rem 0;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.icon-btn:hover {
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.icon-btn.danger:hover {
+  color: var(--danger);
+}
+
+.hidden-file {
+  display: none;
+}
+
+/* ------------------------------ outline ------------------------------ */
+
+.outline-add {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 0.7rem;
+}
+
+.outline-add .ctl {
+  flex: 1;
+}
+
+.outline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.outline-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.34rem 0.4rem;
+  border-radius: 0.35rem;
+  cursor: pointer;
+}
+
+.outline-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.outline-item.selected {
+  background: rgba(179, 157, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(179, 157, 255, 0.4);
+}
+
+.swatch {
+  width: 0.62rem;
+  height: 0.62rem;
+  border-radius: 0.18rem;
+  flex: 0 0 auto;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.outline-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.78rem;
+}
+
+.outline-actions {
+  display: flex;
+  gap: 0.1rem;
+  opacity: 0;
+}
+
+.outline-item:hover .outline-actions,
+.outline-item.selected .outline-actions {
+  opacity: 1;
+}
+
+.outline-empty,
+.outline-count {
+  color: var(--muted);
+  font-size: 0.72rem;
+  padding: 0.4rem;
+}
+
+.hint {
+  margin: 0.2rem 0 0.4rem;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* ------------------------------- lights ------------------------------ */
+
+.light-block {
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  padding: 0.45rem 0.5rem;
+  margin-bottom: 0.5rem;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.light-head {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.35rem;
+}
+
+.light-name {
+  font-size: 0.76rem;
+  flex: 1;
+}
+
+.light-type {
+  font-size: 0.66rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ------------------------------ timeline ----------------------------- */
+
+.timeline-mode {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-scrub {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.timeline-label {
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.kf-track {
+  position: relative;
+  height: 2.6rem;
+  margin: 0 0 0.4rem;
+}
+
+.kf-ticks {
+  position: absolute;
+  inset: 0;
+}
+
+.kf-tick {
+  position: absolute;
+  top: 0;
+  bottom: 1.5rem;
+  width: 1px;
+  background: var(--line);
+}
+
+.kf-markers {
+  position: absolute;
+  inset: 0;
+}
+
+.kf-marker {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.kf-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  background: var(--panel-2);
+  border: 2px solid var(--muted);
+  cursor: grab;
+  touch-action: none;
+}
+
+.kf-dot:hover {
+  border-color: var(--accent);
+}
+
+.kf-marker.active .kf-dot {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(179, 157, 255, 0.8);
+}
+
+.kf-tag {
+  font-size: 0.64rem;
+  color: var(--muted);
+  white-space: nowrap;
+  max-width: 8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.kf-marker.active .kf-tag {
+  color: var(--ink);
+}
+
+.timeline-controls {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.timeline-label-host {
+  margin-top: 0.4rem;
+  max-width: 20rem;
+}

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orbit — Scene editor</title>
+  </head>
+  <body>
+    <div id="shell">
+      <header id="toolbar">
+        <span class="brand-mini">ORBIT</span>
+      </header>
+
+      <aside id="panel-outline"></aside>
+
+      <main id="viewport-wrap">
+        <canvas id="viewport"></canvas>
+        <div id="status"></div>
+      </main>
+
+      <aside id="panel-inspector"></aside>
+
+      <footer id="panel-timeline"></footer>
+    </div>
+
+    <script type="module" src="/src/editor/main.ts"></script>
+  </body>
+</html>

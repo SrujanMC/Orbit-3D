@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Orbit — scroll-driven 3D sites</title>
+    <meta
+      name="description"
+      content="Author a 3D scene on a timeline, then publish it as a static site. One scene file, two renderers."
+    />
+  </head>
+  <body>
+    <canvas id="stage" aria-hidden="true"></canvas>
+
+    <header class="topbar">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark"></span>
+        <span class="brand-name">ORBIT</span>
+      </a>
+      <nav class="topnav">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#format">Format</a>
+        <a href="./editor.html">Open editor</a>
+        <a class="cta" href="#start">Start a scene</a>
+      </nav>
+    </header>
+
+    <div class="hud" aria-hidden="true">
+      <div class="hud-label" id="hud-label">Establish</div>
+      <div class="hud-bar"><div class="hud-fill" id="hud-fill"></div></div>
+    </div>
+
+    <noscript>
+      <p class="fallback">This page renders a WebGL scene and needs JavaScript enabled.</p>
+    </noscript>
+
+    <!-- ============================ scroll hero ============================ -->
+
+    <div class="track" id="track">
+      <section class="panel" data-from="0" data-to="0.3">
+        <p class="eyebrow">Scroll-driven WebGL</p>
+        <h1>Websites that<br />move with you.</h1>
+        <p class="lede">
+          Build the scene on a timeline, then ship it as static files. The camera is
+          part of the design, not an afterthought.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="./editor.html">Open the editor</a>
+          <a class="btn ghost" href="#how">See how it works</a>
+        </div>
+      </section>
+
+      <section class="panel" data-from="0.3" data-to="0.6">
+        <p class="eyebrow">One scene, two renderers</p>
+        <h2>The editor and the site<br />read the same file.</h2>
+        <p class="lede">
+          A scene is JSON: objects, materials, lights, and camera keyframes. The editor
+          writes it, the published site reads it. There is no export step to drift out
+          of sync.
+        </p>
+        <ul class="checks">
+          <li>Transform gizmos and live property panels</li>
+          <li>Scroll timeline with camera keyframes</li>
+          <li>Save, load, and export to a static bundle</li>
+        </ul>
+      </section>
+
+      <section class="panel" data-from="0.6" data-to="0.94">
+        <p class="eyebrow">Authored frame by frame</p>
+        <h2>Choreograph the camera,<br />then let it run.</h2>
+        <p class="lede">
+          Place keyframes along the scroll track, set the pose at each one, and the
+          runtime interpolates between them. Objects you don't touch keep their base
+          transform, so you only animate what matters.
+        </p>
+      </section>
+
+      <section class="panel" data-from="0.94" data-to="1">
+        <p class="eyebrow">Deploy anywhere</p>
+        <h2>Static files.<br />No runtime service.</h2>
+        <p class="lede">
+          Export a folder and drop it on any host. The same scene also opens straight
+          back up in the editor for the next pass.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="./editor.html">Open the editor</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ====================== everything below the fold ====================== -->
+
+    <div class="post">
+      <!-- stack -->
+      <section class="band band-tight">
+        <p class="stack-line">
+          Runs on the stack you already have —
+          <span class="stack-item">three.js</span>
+          <span class="stack-item">TypeScript</span>
+          <span class="stack-item">Vite</span>
+          <span class="stack-item">WebGL</span>
+          <span class="stack-item">no runtime service</span>
+        </p>
+      </section>
+
+      <!-- features -->
+      <section class="band" id="features">
+        <header class="band-head">
+          <p class="index-mark">01 / Capabilities</p>
+          <h2>Everything you need to<br />author a scene. Nothing you don't.</h2>
+        </header>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <p class="feature-num">01</p>
+            <h3>Timeline-authoring camera</h3>
+            <p>
+              Place keyframes along the scroll track and set the camera pose at each one.
+              The runtime interpolates between them with per-segment easing, so the
+              camera move is a design decision you actually make.
+            </p>
+          </article>
+
+          <article class="feature">
+            <p class="feature-num">02</p>
+            <h3>Two modes, no ambiguity</h3>
+            <p>
+              In <em>Scene</em> mode the gizmo edits the object's base transform. In
+              <em>Preview</em> mode it edits the active keyframe's override. Sculpting a
+              shape can never accidentally change your camera choreography.
+            </p>
+          </article>
+
+          <article class="feature">
+            <p class="feature-num">03</p>
+            <h3>Edits that survive dragging</h3>
+            <p>
+              Property panels refresh values in place rather than rebuilding the DOM, so
+              a slider never disappears from under the pointer mid-drag. Keyframe markers
+              behave the same way.
+            </p>
+          </article>
+
+          <article class="feature">
+            <p class="feature-num">04</p>
+            <h3>Export that is just files</h3>
+            <p>
+              A build produces a folder you can drop on any static host. No server
+              component, no database, no vendor account between you and your own work.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- how it works -->
+      <section class="band" id="how">
+        <header class="band-head">
+          <p class="index-mark">02 / Workflow</p>
+          <h2>Three steps, and the<br />third one is optional.</h2>
+        </header>
+
+        <ol class="steps">
+          <li class="step">
+            <p class="step-num">Step one</p>
+            <h3>Build the scene</h3>
+            <p>
+              Add primitives, set materials, place lights. Work in Scene mode where the
+              camera is yours and every object sits at its resting transform.
+            </p>
+          </li>
+          <li class="step">
+            <p class="step-num">Step two</p>
+            <h3>Choreograph the scroll</h3>
+            <p>
+              Switch to Preview, scrub the timeline, and capture poses into keyframes. Add
+              looping spin and bobbing motion for anything that should move on its own.
+            </p>
+          </li>
+          <li class="step">
+            <p class="step-num">Step three</p>
+            <h3>Export, then keep editing</h3>
+            <p>
+              Ship the bundle. The same scene file reopens in the editor for the next
+              pass — there is no round-trip conversion to lose your work in.
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <!-- format -->
+      <section class="band band-split" id="format">
+        <div class="split-copy">
+          <p class="index-mark">03 / The format</p>
+          <h2>A scene is a<br />readable file.</h2>
+          <p class="lede">
+            No proprietary binary, no locked project format. It is JSON you can diff,
+            review, hand-edit, and generate. Each keyframe resolves into a complete pose
+            per object: anything it mentions merges over the base transform, anything it
+            does not mention keeps the base transform.
+          </p>
+          <p class="lede">
+            That rule is why adding an object never retroactively breaks the keyframes
+            you already authored.
+          </p>
+        </div>
+
+        <div class="split-code">
+          <div class="code-head">
+            <span class="code-dot"></span>
+            <span>scenes/demo.json</span>
+          </div>
+<pre class="code"><code>{
+  "objects": [{
+    "id": "obj_knot",
+    "geometry": { "type": "torusKnot", "args": [1.05, 0.3, 220, 32] },
+    "material": {
+      "type": "physical",
+      "color": "#b39dff",
+      "metalness": 0.9,
+      "roughness": 0.14
+    },
+    "spin": [0, 0.16, 0]
+  }],
+
+  "scroll": {
+    "length": 420,
+    "easing": "easeInOut",
+    "keyframes": [{
+      "at": 0,
+      "label": "Establish",
+      "camera": {
+        "position": [0, 3.2, 13.5],
+        "target": [0, 1.5, 0]
+      },
+      "objects": [{
+        "id": "obj_knot",
+        "transform": { "scale": [0.85, 0.85, 0.85] },
+        "opacity": 0.9
+      }]
+    }]
+  }
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- use cases -->
+      <section class="band">
+        <header class="band-head">
+          <p class="index-mark">04 / Where it fits</p>
+          <h2>Built for scenes that<br />carry an argument.</h2>
+        </header>
+
+        <div class="case-grid">
+          <article class="case">
+            <h3>Product reveals</h3>
+            <p>Walk a camera around an object as the reader scrolls. The motion explains structure that a flat image cannot.</p>
+          </article>
+          <article class="case">
+            <h3>Technical storytelling</h3>
+            <p>Show a system from the outside in. Narrated camera work turns an architecture diagram into something people finish.</p>
+          </article>
+          <article class="case">
+            <h3>Portfolio pieces</h3>
+            <p>Give a single object the whole page and let the lighting do the talking.</p>
+          </article>
+          <article class="case">
+            <h3>Interactive reports</h3>
+            <p>Keyframes are data. Generate a scroll timeline from a dataset and the same file still opens in the editor.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- faq -->
+      <section class="band band-narrow" id="faq">
+        <header class="band-head">
+          <p class="index-mark">05 / Questions</p>
+          <h2>Reasonable things to ask.</h2>
+        </header>
+
+        <details class="faq">
+          <summary>Do I need to know three.js?</summary>
+          <p>
+            Not to author a scene — the editor covers transforms, materials, lights, and
+            camera keyframes. You will want it if you plan to extend the runtime with
+            custom geometry or shaders, which is the intended way to go beyond primitives.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary>Can I load my own models?</summary>
+          <p>
+            Not yet. This ships with primitives only. A GLTF loader is the highest-value
+            next addition and the scene format already has room for a model geometry type
+            without breaking existing files.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary>What happens on low-end devices?</summary>
+          <p>
+            The renderer clamps device pixel ratio at 2 and shadow maps are a single
+            directional light. It also honours <code>prefers-reduced-motion</code>, in which
+            case the scroll panels drop into normal document flow and the 3D backdrop
+            becomes a still.
+          </p>
+        </details>
+
+        <details class="faq">
+          <summary>Is the scene format versioned?</summary>
+          <p>
+            It carries a version field and scenes are validated on load — structural
+            problems are reported rather than silently rendering wrong. A version is
+            cheap to add now and expensive to add later.
+          </p>
+        </details>
+      </section>
+
+      <!-- cta -->
+      <section class="band band-cta" id="start">
+        <p class="index-mark">Start</p>
+        <h2>Open the editor and<br />build one scene.</h2>
+        <p class="lede">
+          It runs entirely in your browser. Nothing to install, nothing to sign up for,
+          and your work autosaves locally as you go.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="./editor.html">Open the editor</a>
+          <a class="btn ghost" href="#format">Read the format</a>
+        </div>
+      </section>
+
+      <!-- footer -->
+      <footer class="site-footer">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="brand-mark"></span>
+            <p class="footer-name">ORBIT</p>
+            <p class="footer-blurb">
+              A scroll-driven 3D runtime and the editor that authors it.
+            </p>
+          </div>
+
+          <nav class="footer-col">
+            <p class="footer-head">Product</p>
+            <a href="#features">Features</a>
+            <a href="#how">How it works</a>
+            <a href="#format">Scene format</a>
+            <a href="./editor.html">Editor</a>
+          </nav>
+
+          <nav class="footer-col">
+            <p class="footer-head">Reference</p>
+            <a href="#faq">FAQ</a>
+            <a href="./scenes/demo.json">Demo scene</a>
+            <a href="./editor.html">Live demo</a>
+          </nav>
+
+          <nav class="footer-col">
+            <p class="footer-head">Built with</p>
+            <span>three.js</span>
+            <span>TypeScript</span>
+            <span>Vite</span>
+          </nav>
+        </div>
+
+        <div class="footer-base">
+          <span>Original work. Placeholder brand — replace before shipping.</span>
+          <span>No analytics, no cookies, no third-party requests.</span>
+        </div>
+      </footer>
+    </div>
+
+    <script type="module" src="/src/site/main.ts"></script>
+  </body>
+</html>

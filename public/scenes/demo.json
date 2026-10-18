@@ -1,0 +1,143 @@
+{
+  "meta": { "name": "Orbit Demo", "version": 1 },
+  "environment": {
+    "background": "#07060f",
+    "fog": { "enabled": true, "color": "#07060f", "near": 14, "far": 46 },
+    "ground": { "enabled": true, "color": "#0d0b1a", "size": 80, "y": -1.6 }
+  },
+  "lights": [
+    { "id": "light_amb", "name": "Ambient", "type": "ambient", "color": "#8a86c8", "intensity": 0.5, "position": [0, 0, 0], "distance": 0, "castShadow": false },
+    { "id": "light_key", "name": "Key", "type": "directional", "color": "#fff4f0", "intensity": 2.4, "position": [6, 11, 7], "distance": 0, "castShadow": true },
+    { "id": "light_rim", "name": "Rim", "type": "point", "color": "#6df0ff", "intensity": 180, "position": [-7, 3, -5], "distance": 30, "castShadow": false },
+    { "id": "light_warm", "name": "Warm", "type": "point", "color": "#ff5f9e", "intensity": 140, "position": [5, 2, 6], "distance": 28, "castShadow": false },
+    { "id": "light_fill", "name": "Fill", "type": "hemisphere", "color": "#3b3a6b", "intensity": 0.7, "position": [0, 6, 0], "distance": 0, "castShadow": false }
+  ],
+  "objects": [
+    {
+      "id": "obj_knot",
+      "name": "Hero Knot",
+      "geometry": { "type": "torusKnot", "args": [1.05, 0.3, 220, 32] },
+      "material": { "type": "physical", "color": "#b39dff", "metalness": 0.9, "roughness": 0.14, "emissive": "#2a1d5c", "emissiveIntensity": 0.7, "wireframe": false, "transparent": false, "opacity": 1 },
+      "transform": { "position": [0, 1.5, 0], "rotation": [0.4, 0, 0.1], "scale": [1, 1, 1] },
+      "visible": true,
+      "spin": [0, 0.16, 0]
+    },
+    {
+      "id": "obj_ring",
+      "name": "Orbit Ring",
+      "geometry": { "type": "torus", "args": [3.1, 0.045, 20, 220] },
+      "material": { "type": "standard", "color": "#6df0ff", "metalness": 0.4, "roughness": 0.3, "emissive": "#6df0ff", "emissiveIntensity": 1.4, "wireframe": false, "transparent": true, "opacity": 0.85 },
+      "transform": { "position": [0, 1.5, 0], "rotation": [1.35, 0, 0], "scale": [1, 1, 1] },
+      "visible": true,
+      "spin": [0, 0.1, 0]
+    },
+    {
+      "id": "obj_ring2",
+      "name": "Orbit Ring 2",
+      "geometry": { "type": "torus", "args": [4.2, 0.03, 20, 220] },
+      "material": { "type": "standard", "color": "#ff5f9e", "metalness": 0.4, "roughness": 0.3, "emissive": "#ff5f9e", "emissiveIntensity": 1.1, "wireframe": false, "transparent": true, "opacity": 0.6 },
+      "transform": { "position": [0, 1.5, 0], "rotation": [1.05, 0.5, 0.2], "scale": [1, 1, 1] },
+      "visible": true,
+      "spin": [0, -0.07, 0]
+    },
+    {
+      "id": "obj_orb_a",
+      "name": "Orb A",
+      "geometry": { "type": "sphere", "args": [0.3, 40, 28] },
+      "material": { "type": "standard", "color": "#ffd6a5", "metalness": 0.2, "roughness": 0.35, "emissive": "#ff9f45", "emissiveIntensity": 1.6, "wireframe": false, "transparent": false, "opacity": 1 },
+      "transform": { "position": [3.1, 1.5, 0], "rotation": [0, 0, 0], "scale": [1, 1, 1] },
+      "visible": true,
+      "bob": { "amplitude": 0.18, "speed": 1.5, "phase": 0 }
+    },
+    {
+      "id": "obj_orb_b",
+      "name": "Orb B",
+      "geometry": { "type": "icosahedron", "args": [0.42, 1] },
+      "material": { "type": "standard", "color": "#9dffcf", "metalness": 0.85, "roughness": 0.2, "emissive": "#0f5c3d", "emissiveIntensity": 0.9, "wireframe": false, "transparent": false, "opacity": 1 },
+      "transform": { "position": [-3.1, 1.5, 0], "rotation": [0.3, 0.6, 0], "scale": [1, 1, 1] },
+      "visible": true,
+      "spin": [0.4, 0.55, 0],
+      "bob": { "amplitude": 0.24, "speed": 1.15, "phase": 1.9 }
+    },
+    {
+      "id": "obj_column_l",
+      "name": "Column L",
+      "geometry": { "type": "box", "args": [0.5, 5, 0.5] },
+      "material": { "type": "standard", "color": "#2b2748", "metalness": 0.7, "roughness": 0.45, "emissive": "#000000", "emissiveIntensity": 0, "wireframe": false, "transparent": false, "opacity": 1 },
+      "transform": { "position": [-6.5, 0.9, -2], "rotation": [0, 0.4, 0], "scale": [1, 1, 1] },
+      "visible": true
+    },
+    {
+      "id": "obj_column_r",
+      "name": "Column R",
+      "geometry": { "type": "box", "args": [0.5, 5, 0.5] },
+      "material": { "type": "standard", "color": "#2b2748", "metalness": 0.7, "roughness": 0.45, "emissive": "#000000", "emissiveIntensity": 0, "wireframe": false, "transparent": false, "opacity": 1 },
+      "transform": { "position": [6.5, 0.9, -2], "rotation": [0, -0.4, 0], "scale": [1, 1, 1] },
+      "visible": true
+    }
+  ],
+  "scroll": {
+    "enabled": true,
+    "length": 420,
+    "fov": 45,
+    "easing": "easeInOut",
+    "keyframes": [
+      {
+        "at": 0,
+        "label": "Establish",
+        "camera": { "position": [0, 3.2, 13.5], "target": [0, 1.5, 0] },
+        "objects": [
+          { "id": "obj_knot", "transform": { "position": [0, 1.5, 0], "rotation": [0.4, 0, 0.1], "scale": [0.85, 0.85, 0.85] }, "opacity": 0.9 },
+          { "id": "obj_ring", "transform": { "position": [0, 1.5, 0], "rotation": [1.35, 0, 0], "scale": [0.9, 0.9, 0.9] } },
+          { "id": "obj_ring2", "transform": { "position": [0, 1.5, 0], "rotation": [1.05, 0.5, 0.2], "scale": [0.9, 0.9, 0.9] }, "opacity": 0.25 },
+          { "id": "obj_orb_a", "transform": { "position": [3.4, 1.5, 0.4], "rotation": [0, 0, 0], "scale": [1, 1, 1] }, "opacity": 0 },
+          { "id": "obj_orb_b", "transform": { "position": [-3.4, 1.5, 0.4], "rotation": [0.3, 0.6, 0], "scale": [1, 1, 1] }, "opacity": 0 },
+          { "id": "obj_column_l", "transform": { "position": [-8.5, 0.9, -4], "rotation": [0, 0.4, 0], "scale": [1, 1, 1] }, "opacity": 0 },
+          { "id": "obj_column_r", "transform": { "position": [8.5, 0.9, -4], "rotation": [0, -0.4, 0], "scale": [1, 1, 1] }, "opacity": 0 }
+        ]
+      },
+      {
+        "at": 0.34,
+        "label": "Push in",
+        "camera": { "position": [0, 2.1, 6.4], "target": [0, 1.5, 0] },
+        "objects": [
+          { "id": "obj_knot", "transform": { "position": [0, 1.5, 0], "rotation": [0.9, 2.1, 0.1], "scale": [1.1, 1.1, 1.1] }, "opacity": 1 },
+          { "id": "obj_ring", "transform": { "position": [0, 1.5, 0], "rotation": [1.1, 1.4, 0], "scale": [1.05, 1.05, 1.05] }, "opacity": 1 },
+          { "id": "obj_ring2", "transform": { "position": [0, 1.5, 0], "rotation": [1.5, 2.2, 0.2], "scale": [1.05, 1.05, 1.05] }, "opacity": 0.8 },
+          { "id": "obj_orb_a", "transform": { "position": [3.1, 1.5, 0], "rotation": [0, 1.2, 0], "scale": [1, 1, 1] }, "opacity": 1 },
+          { "id": "obj_orb_b", "transform": { "position": [-3.1, 1.5, 0], "rotation": [1.1, 0.6, 0], "scale": [1, 1, 1] }, "opacity": 1 },
+          { "id": "obj_column_l", "transform": { "position": [-6.5, 0.9, -2], "rotation": [0, 0.4, 0], "scale": [1, 1, 1] }, "opacity": 1 },
+          { "id": "obj_column_r", "transform": { "position": [6.5, 0.9, -2], "rotation": [0, -0.4, 0], "scale": [1, 1, 1] }, "opacity": 1 }
+        ]
+      },
+      {
+        "at": 0.68,
+        "label": "Low orbit",
+        "camera": { "position": [-5.6, 1.05, 4.4], "target": [0.4, 1.6, 0] },
+        "objects": [
+          { "id": "obj_knot", "transform": { "position": [0, 1.7, 0], "rotation": [0.2, 3.9, -0.3], "scale": [1.25, 1.25, 1.25] }, "opacity": 1 },
+          { "id": "obj_ring", "transform": { "position": [0, 1.7, 0], "rotation": [0.6, 3, 0.4], "scale": [1.3, 1.3, 1.3] }, "opacity": 1 },
+          { "id": "obj_ring2", "transform": { "position": [0, 1.7, 0], "rotation": [1.8, 4.4, 0.2], "scale": [1.3, 1.3, 1.3] }, "opacity": 1 },
+          { "id": "obj_orb_a", "transform": { "position": [1.2, 3.6, 2.6], "rotation": [0.4, 2.4, 0], "scale": [1.4, 1.4, 1.4] }, "opacity": 1 },
+          { "id": "obj_orb_b", "transform": { "position": [-2.8, 0.4, -1.8], "rotation": [1.6, 1.4, 0.4], "scale": [1.2, 1.2, 1.2] }, "opacity": 1 },
+          { "id": "obj_column_l", "transform": { "position": [-4.2, 1.4, -3.4], "rotation": [0.3, 0.9, 0.1], "scale": [1, 1.3, 1] }, "opacity": 1 },
+          { "id": "obj_column_r", "transform": { "position": [9.2, 0.9, -1], "rotation": [0, -0.4, 0], "scale": [1, 1, 1] }, "opacity": 0.7 }
+        ]
+      },
+      {
+        "at": 1,
+        "label": "Resolve",
+        "camera": { "position": [0, 5.4, 15], "target": [0, 1.6, 0] },
+        "objects": [
+          { "id": "obj_knot", "transform": { "position": [0, 1.6, 0], "rotation": [1.6, 6.4, 0], "scale": [1, 1, 1] }, "opacity": 1 },
+          { "id": "obj_ring", "transform": { "position": [0, 1.6, 0], "rotation": [1.45, 6, 0], "scale": [1.15, 1.15, 1.15] }, "opacity": 0.9 },
+          { "id": "obj_ring2", "transform": { "position": [0, 1.6, 0], "rotation": [1.2, 6.6, 0.2], "scale": [1.15, 1.15, 1.15] }, "opacity": 0.7 },
+          { "id": "obj_orb_a", "transform": { "position": [3.6, 1.6, 0], "rotation": [0, 6, 0], "scale": [1, 1, 1] }, "opacity": 0.9 },
+          { "id": "obj_orb_b", "transform": { "position": [-3.6, 1.6, 0], "rotation": [2.2, 6, 0], "scale": [1, 1, 1] }, "opacity": 0.9 },
+          { "id": "obj_column_l", "transform": { "position": [-7.4, 0.9, -2.6], "rotation": [0, 0.5, 0], "scale": [1, 1, 1] }, "opacity": 0.85 },
+          { "id": "obj_column_r", "transform": { "position": [7.4, 0.9, -2.6], "rotation": [0, -0.5, 0], "scale": [1, 1, 1] }, "opacity": 0.85 }
+        ]
+      }
+    ]
+  }
+}
